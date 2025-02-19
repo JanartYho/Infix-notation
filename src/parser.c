@@ -29,6 +29,30 @@ bool tokenize(const char *expr, TokenList *tokens)
 			tokens->size++;
 			i++;	// Пропускаем второй `*`
 		}
+		/*else if (expr[i] == '>' && expr[i + 1] == '>')
+		{
+			tokens->tokens[tokens->size].type = 'o';
+			tokens->tokens[tokens->size].op = 'L';	  // ✅ `**` заменяем на `^`
+			tokens->size++;
+			i++;	// Пропускаем второй `*`
+		}
+		else if (expr[i] == '<' && expr[i + 1] == '<')
+		{
+			tokens->tokens[tokens->size].type = 'o';
+			tokens->tokens[tokens->size].op = 'L';	  // ✅ `**` заменяем на `^`
+			tokens->size++;
+			i++;	// Пропускаем второй `*`
+		}*/
+		else if (strchr("+-", expr[i]) && isdigit(expr[i + 1]))
+		{
+			if (expr[i] == '-')
+			{
+				tokens->tokens[tokens->size].type = 'o';
+				tokens->tokens[tokens->size].op = 'u';
+			}
+
+			tokens->size++;
+		}
 		else if (strchr("+-*/%^()", expr[i]))
 		{
 			tokens->tokens[tokens->size].type = 'o';

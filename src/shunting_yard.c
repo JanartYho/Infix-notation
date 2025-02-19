@@ -12,6 +12,8 @@ int precedence(char op)
 		return 2;
 	if (op == '^')
 		return 3;	 // `^` самый высокий приоритет
+	if (op == 'u')
+		return 4;
 	return 0;
 }
 

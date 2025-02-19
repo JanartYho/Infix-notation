@@ -27,7 +27,7 @@ bool evaluate_rpn(TokenList *rpn, int *result)
 				free(stack);
 				return false;
 			}
-			int b = stack[--stack_size];
+			int b = token.op != 'u' ? stack[--stack_size] : 0;
 			int a = stack[--stack_size];
 
 			switch (token.op)
@@ -60,6 +60,9 @@ bool evaluate_rpn(TokenList *rpn, int *result)
 			case '^':
 				stack[stack_size++] = (int)pow(a, b);
 				break;	  // ✅ Используем `pow()`
+			case 'u':
+				stack[stack_size++] = -a;
+			break;	  // ✅ Используем `pow()`
 			default:
 				free(stack);
 				return false;
